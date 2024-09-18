@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Login</title>
+    <title>Login Seguro</title>
     <style>
         body {
             font-family: Arial, sans-serif;
@@ -63,17 +63,28 @@
 </div>
 
 <script>
-    document.getElementById('loginForm').addEventListener('submit', function(e) {
+    // Función para convertir un string en un hash SHA-256
+    async function sha256(text) {
+        const encoder = new TextEncoder();
+        const data = encoder.encode(text);
+        const hash = await crypto.subtle.digest('SHA-256', data);
+        return Array.from(new Uint8Array(hash)).map(b => b.toString(16).padStart(2, '0')).join('');
+    }
+
+    document.getElementById('loginForm').addEventListener('submit', async function(e) {
         e.preventDefault();
         
-        // Usuario y contraseña predeterminados
+        // Usuario y contraseña hash predeterminados
         const validUsername = 'usuario';
-        const validPassword = 'contraseña';
+        const validPasswordHash = '5e884898da28047151d0e56f8dc6292773603d0d6aabbdd924ea728e4b138f34'; // Hash SHA-256 de "password"
 
         const username = document.getElementById('username').value;
         const password = document.getElementById('password').value;
 
-        if (username === validUsername && password === validPassword) {
+        // Generar el hash SHA-256 de la contraseña ingresada
+        const passwordHash = await sha256(password);
+
+        if (username === validUsername && passwordHash === validPasswordHash) {
             // Redirigir o mostrar el contenido protegido
             alert('Login exitoso');
             window.location.href = 'contenido.html'; // Cambia esto por la página que quieres mostrar después de iniciar sesión
