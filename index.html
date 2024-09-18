@@ -1,13 +1,87 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="	https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css">
-    <title>GitHub Pages Prueba</title>
+    <title>Login</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background-color: #f4f4f4;
+        }
+
+        .login-container {
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+
+        input[type="text"], input[type="password"] {
+            width: 100%;
+            padding: 10px;
+            margin: 10px 0;
+            border-radius: 5px;
+            border: 1px solid #ccc;
+        }
+
+        button {
+            width: 100%;
+            padding: 10px;
+            background-color: #007bff;
+            border: none;
+            color: #fff;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background-color: #0056b3;
+        }
+
+        .error {
+            color: red;
+        }
+    </style>
 </head>
 <body>
-    <h1>GitHub Pages</h1>
-    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Voluptates ipsum, ipsam quis distinctio nulla mollitia commodi. Optio in eligendi quisquam tempora. Quis ut, rerum necessitatibus recusandae facere earum asperiores molestias vitae doloribus laborum voluptatem sapiente aperiam quibusdam nemo est laboriosam quidem cum, et saepe nostrum. Incidunt eveniet nam nesciunt voluptatem voluptates aliquam soluta ducimus vitae obcaecati molestiae? Magni aliquid ducimus nam? Praesentium repudiandae nulla aliquam ea nam soluta, ipsum voluptates delectus illum officiis quo facere laboriosam minima aut vero assumenda explicabo odit magni placeat dignissimos aliquid eaque sequi minus. Natus accusantium ea pariatur voluptates aliquid corporis expedita provident nisi laboriosam.</p>
+
+<div class="login-container">
+    <h2>Iniciar Sesión</h2>
+    <form id="loginForm">
+        <label for="username">Usuario</label>
+        <input type="text" id="username" name="username" required>
+        <label for="password">Contraseña</label>
+        <input type="password" id="password" name="password" required>
+        <button type="submit">Ingresar</button>
+        <p class="error" id="error"></p>
+    </form>
+</div>
+
+<script>
+    document.getElementById('loginForm').addEventListener('submit', function(e) {
+        e.preventDefault();
+        
+        // Usuario y contraseña predeterminados
+        const validUsername = 'usuario';
+        const validPassword = 'contraseña';
+
+        const username = document.getElementById('username').value;
+        const password = document.getElementById('password').value;
+
+        if (username === validUsername && password === validPassword) {
+            // Redirigir o mostrar el contenido protegido
+            alert('Login exitoso');
+            window.location.href = 'contenido.html'; // Cambia esto por la página que quieres mostrar después de iniciar sesión
+        } else {
+            document.getElementById('error').textContent = 'Usuario o contraseña incorrectos';
+        }
+    });
+</script>
+
 </body>
 </html>
