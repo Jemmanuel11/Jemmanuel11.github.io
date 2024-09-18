@@ -75,16 +75,18 @@
         e.preventDefault();
         
         // Usuario y contraseña hash predeterminados
-        const validUsername = 'usuario';
-        const validPasswordHash = '5e884898da28047151d0e56f8dc6292773603d0d6aabbdd924ea728e4b138f34'; // Hash SHA-256 de "password"
+        const validUsernameHash = 'f90ddd77e400dfe6a681d02f472bdeb9e30de58fbf3fd68f62222bdf01863836'; // Hash SHA-256 del usuario "Emmanuel"
+        const validPasswordHash = '4e3a89dcdabc9ef45780e70b4ff0384ac953cd87f9a15fefb95f98e8c65046f4'; // Hash SHA-256 de la contraseña "miNuevaContraseña"
 
         const username = document.getElementById('username').value;
         const password = document.getElementById('password').value;
 
-        // Generar el hash SHA-256 de la contraseña ingresada
+        // Generar el hash SHA-256 del usuario y la contraseña ingresados
+        const usernameHash = await sha256(username);
         const passwordHash = await sha256(password);
 
-        if (username === validUsername && passwordHash === validPasswordHash) {
+        // Verificar que ambos hashes coincidan
+        if (usernameHash === validUsernameHash && passwordHash === validPasswordHash) {
             // Redirigir o mostrar el contenido protegido
             alert('Login exitoso');
             window.location.href = 'contenido.html'; // Cambia esto por la página que quieres mostrar después de iniciar sesión
